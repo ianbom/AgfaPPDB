@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Orangtua;
+use App\Models\Seleksi;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
@@ -60,9 +61,14 @@ class RegisterController extends Controller
         ]);
 
        if ($user->role == null) {
-        Orangtua::create([
+       $orangtua = Orangtua::create([
             'user_id' => $user->id,
             'nama' => $user->name
+        ]);
+
+        Seleksi::create([
+            'orangtua_id' => $orangtua->id,
+            'status' => 'verifikasi'
         ]);
        }
 

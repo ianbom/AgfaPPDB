@@ -222,7 +222,7 @@
                                                 @endif
                                             </div>
                                             <input type="file" class="form-control @error('profile_anak') is-invalid @enderror" id="profile_anak" name="profile_anak">
-                                            <small class="text-muted">Upload foto anak (format: jpg, jpeg, png, max: 2MB)</small>
+                                            <small class="text-muted">Upload foto anak (format: jpg, jpeg, png,)</small>
                                             @error('profile_anak')
                                             <div class="invalid-feedback">
                                                 {{ $message }}

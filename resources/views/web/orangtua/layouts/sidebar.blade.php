@@ -49,15 +49,15 @@
 
                 <li class="sidebar-title">Seleksi dan Pemberkasan</li>
 
-                <li class="sidebar-item ">
-                    <a href="index.html" class='sidebar-link'>
+                <li class="sidebar-item {{ Request::is('orangtua/pemberkasan*') ? 'active' : '' }}">
+                    <a href="{{ route('orangtua.pemberkasan.index') }}" class='sidebar-link'>
                         <i class="bi bi-grid-fill"></i>
                         <span>Pemberkasan</span>
                     </a>
                 </li>
 
                 <li class="sidebar-item">
-                    <a href="#" class='sidebar-link'>
+                    <a href="" class='sidebar-link'>
                         <i class="bi bi-stack"></i>
                         <span>Seleksi</span>
                     </a>

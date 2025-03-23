@@ -60,25 +60,18 @@
                     </ul>
                 </li> --}}
 
-                <li class="sidebar-title">OrangTua dan Siswa</li>
+                <li class="sidebar-title ">Data Siswa</li>
 
-                <li class="sidebar-item ">
-                    <a href="index.html" class='sidebar-link'>
+                <li class="sidebar-item {{ Request::is('admin/orangtua*') ? 'active' : '' }} ">
+                    <a href="{{ route('admin.orangtua.index') }}" class='sidebar-link'>
                         <i class="bi bi-grid-fill"></i>
-                        <span>Orang Tua</span>
+                        <span>Orang Tua & Siswa</span>
                     </a>
                 </li>
 
-                <li class="sidebar-item">
-                    <a href="#" class='sidebar-link'>
-                        <i class="bi bi-stack"></i>
-                        <span>Siswa</span>
-                    </a>
 
-                </li>
-
-                <li class="sidebar-item">
-                    <a href="#" class='sidebar-link'>
+                <li class="sidebar-item {{ Request::is('admin/seleksi*') ? 'active' : '' }}">
+                    <a href="{{ route('admin.seleksi.index') }}" class='sidebar-link'>
                         <i class="bi bi-collection-fill"></i>
                         <span>Seleksi</span>
                     </a>

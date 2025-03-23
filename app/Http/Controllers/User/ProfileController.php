@@ -54,7 +54,7 @@ class ProfileController extends Controller
 
         $request->validate([
             'nama_anak' => 'nullable|string|max:255',
-            'profile_anak' => 'nullable|max:15',
+            'profile_anak' => 'nullable',
         ]);
 
         try {

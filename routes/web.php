@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\OrangtuaController;
 use App\Http\Controllers\Admin\PemberkasanController;
+use App\Http\Controllers\Admin\SeleksiController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\User\PemberkasanController as UserPemberkasanController;
 use App\Http\Controllers\User\ProfileController;
@@ -18,7 +20,11 @@ Route::get('/admin', function () {
 
 Route::prefix('admin')->middleware([])->as('admin.')->group(function () {
     Route::resource('/user', UserController::class);
+    Route::resource('/orangtua', OrangtuaController::class);
     Route::resource('/pemberkasan', PemberkasanController::class);
+    Route::resource('/seleksi', SeleksiController::class);
+    Route::post('/seleksi/status/update', [SeleksiController::class, 'bulkUpdateSeleksi'])->name('bulkUpdateSeleksi');
+
  });
 
  Route::prefix('orangtua')->middleware([])->as('orangtua.')->group(function () {
