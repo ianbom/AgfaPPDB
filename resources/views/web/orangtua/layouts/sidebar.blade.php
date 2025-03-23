@@ -12,29 +12,16 @@
         </div>
         <div class="sidebar-menu">
             <ul class="menu">
-                <li class="sidebar-title">Menu</li>
+                <li class="sidebar-title">Profile</li>
 
-                <li class="sidebar-item ">
-                    <a href="index.html" class='sidebar-link'>
+                <li class="sidebar-item {{ Request::is('orangtua/profile*') ? 'active' : '' }}">
+                    <a href="{{ route('orangtua.profile.index') }}" class='sidebar-link'>
                         <i class="bi bi-grid-fill"></i>
-                        <span>Dashboard</span>
+                        <span>Profile</span>
                     </a>
                 </li>
 
-                <li class="sidebar-item has-sub {{ Request::is('admin/pemberkasan*') ? 'active' : '' }}">
-                    <a href="#" class='sidebar-link'>
-                        <i class="bi bi-stack"></i>
-                        <span>Pemberkasan</span>
-                    </a>
-                    <ul class="submenu ">
-                        <li class="submenu-item ">
-                            <a href="{{ route('admin.pemberkasan.index') }}">List</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="{{ route('admin.pemberkasan.create') }}">Create</a>
-                        </li>
-                    </ul>
-                </li>
+
 
                 {{-- <li class="sidebar-item  has-sub">
                     <a href="#" class='sidebar-link'>
@@ -60,36 +47,22 @@
                     </ul>
                 </li> --}}
 
-                <li class="sidebar-title">OrangTua dan Siswa</li>
+                <li class="sidebar-title">Seleksi dan Pemberkasan</li>
 
                 <li class="sidebar-item ">
                     <a href="index.html" class='sidebar-link'>
                         <i class="bi bi-grid-fill"></i>
-                        <span>Orang Tua</span>
+                        <span>Pemberkasan</span>
                     </a>
                 </li>
 
                 <li class="sidebar-item">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-stack"></i>
-                        <span>Siswa</span>
-                    </a>
-
-                </li>
-
-                <li class="sidebar-item">
-                    <a href="#" class='sidebar-link'>
-                        <i class="bi bi-collection-fill"></i>
                         <span>Seleksi</span>
                     </a>
 
                 </li>
-
-
-
-
-
-
             </ul>
         </div>
         <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>

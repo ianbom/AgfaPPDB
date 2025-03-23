@@ -57,7 +57,7 @@ class PemberkasanController extends Controller
             DB::commit();
 
             return redirect()->route('admin.pemberkasan.index')
-                ->with('success', 'Pemberkasan berhasil dibuat');
+                ->with('success', 'Data Pemberkasan berhasil dibuat');
 
         } catch (\Exception $e) {
             DB::rollBack();
@@ -128,11 +128,9 @@ class PemberkasanController extends Controller
     }
 }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy(Pemberkasan $pemberkasan)
     {
-        //
+        $pemberkasan->delete();
+        return redirect()->back()->with('success', 'Data pemberkasan berhasil dihapus');
     }
 }

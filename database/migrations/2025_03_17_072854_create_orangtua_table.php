@@ -14,8 +14,11 @@ return new class extends Migration
         Schema::create('orangtua', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users', 'id')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->string('nama');
-            $table->string('nama_anak');
+            $table->string('nama')->nullable();
+            $table->string('no_hp')->nullable();
+            $table->text('alamat')->nullable();
+            $table->string('nama_anak')->nullable();
+            $table->string('profile_anak')->nullable();
             $table->timestamps();
         });
     }

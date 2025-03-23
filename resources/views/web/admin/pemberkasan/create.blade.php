@@ -65,22 +65,12 @@
                                             </div>
                                         </div>
 
+                                        <!-- Bagian opsi pemberkasan yang hanya ditampilkan untuk radio/checkbox -->
                                         <div class="col-12 pilihan-section" style="display: none;">
                                             <div class="form-group">
                                                 <label>Pilihan Jawaban</label>
                                                 <div id="opsi-container">
-                                                    <div class="input-group mb-2">
-                                                        <input type="text" name="opsi[]" class="form-control @error('opsi.*') is-invalid @enderror"
-                                                            placeholder="Masukkan pilihan">
-                                                        <button type="button" class="btn btn-danger remove-opsi">
-                                                            <i class="bi bi-trash"></i>
-                                                        </button>
-                                                    </div>
-                                                    @error('opsi.*')
-                                                    <div class="text-danger small">
-                                                        {{ $message }}
-                                                    </div>
-                                                    @enderror
+                                                    <!-- Container untuk opsi dinamis -->
                                                 </div>
                                                 <button type="button" class="btn btn-sm btn-secondary mt-2" id="tambah-opsi">
                                                     <i class="bi bi-plus-circle"></i> Tambah Pilihan
@@ -127,22 +117,31 @@
 
             // Tambahkan event listener untuk tombol hapus
             newOpsi.querySelector('.remove-opsi').addEventListener('click', function() {
-                opsiContainer.removeChild(newOpsi);
+                if (opsiContainer.children.length > 1) {
+                    opsiContainer.removeChild(newOpsi);
+                }
             });
         }
 
         // Inisialisasi tampilan berdasarkan tipe yang dipilih
         function updateTipeDisplay() {
+            // Hanya tampilkan bagian pilihan jika tipe adalah radio atau checkbox
             if (tipeSelect.value === 'radio' || tipeSelect.value === 'checkbox') {
                 pilihanSection.style.display = 'block';
 
-                // Pastikan minimal ada satu opsi
-                if (opsiContainer.children.length === 0) {
+                // Pastikan minimal ada dua opsi jika belum ada
+                if (opsiContainer.children.length < 2) {
+                    // Bersihkan container terlebih dahulu
+                    opsiContainer.innerHTML = '';
                     tambahOpsi();
                     tambahOpsi();
                 }
             } else {
+                // Sembunyikan bagian pilihan untuk tipe text dan file
                 pilihanSection.style.display = 'none';
+
+                // Kosongkan container opsi untuk mencegah pengiriman data yang tidak perlu
+                opsiContainer.innerHTML = '';
             }
         }
 
@@ -168,35 +167,34 @@
         // Jalankan saat halaman dimuat untuk mengatur tampilan awal
         updateTipeDisplay();
 
-        // Jika ada nilai lama, mungkin dari validasi yang gagal, atur kembali form
-        @if(old('opsi'))
-            pilihanSection.style.display = 'block';
-            // Hapus semua opsi yang ada
-            while (opsiContainer.firstChild) {
-                opsiContainer.removeChild(opsiContainer.firstChild);
-            }
+        // Jika ada nilai lama dari validasi yang gagal, atur kembali form
+        @if(old('tipe') == 'radio' || old('tipe') == 'checkbox')
+            @if(old('opsi'))
+                // Bersihkan container terlebih dahulu
+                opsiContainer.innerHTML = '';
 
-            // Tambahkan opsi dari nilai lama
-            @foreach(old('opsi') as $oldOpsi)
-                const oldOpsiElement = document.createElement('div');
-                oldOpsiElement.className = 'input-group mb-2';
-                oldOpsiElement.innerHTML = `
-                    <input type="text" name="opsi[]" class="form-control" value="{{ $oldOpsi }}" placeholder="Masukkan pilihan">
-                    <button type="button" class="btn btn-danger remove-opsi">
-                        <i class="bi bi-trash"></i>
-                    </button>
-                `;
-                opsiContainer.appendChild(oldOpsiElement);
-            @endforeach
+                // Tambahkan opsi dari nilai lama
+                @foreach(old('opsi') as $oldOpsi)
+                    const oldOpsiElement = document.createElement('div');
+                    oldOpsiElement.className = 'input-group mb-2';
+                    oldOpsiElement.innerHTML = `
+                        <input type="text" name="opsi[]" class="form-control" value="{{ $oldOpsi }}" placeholder="Masukkan pilihan">
+                        <button type="button" class="btn btn-danger remove-opsi">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    `;
+                    opsiContainer.appendChild(oldOpsiElement);
+                @endforeach
 
-            // Tambahkan event listener untuk semua tombol hapus
-            document.querySelectorAll('.remove-opsi').forEach(button => {
-                button.addEventListener('click', function() {
-                    if (opsiContainer.children.length > 1) {
-                        opsiContainer.removeChild(this.closest('.input-group'));
-                    }
+                // Tambahkan event listener untuk semua tombol hapus
+                document.querySelectorAll('.remove-opsi').forEach(button => {
+                    button.addEventListener('click', function() {
+                        if (opsiContainer.children.length > 1) {
+                            opsiContainer.removeChild(this.closest('.input-group'));
+                        }
+                    });
                 });
-            });
+            @endif
         @endif
     });
 </script>
