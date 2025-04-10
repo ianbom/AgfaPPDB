@@ -18,11 +18,11 @@ class PemberkasanController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {   
+    {
         $orangtua_id = Auth::user()->orangtua->id;
         $pemberkasan = Pemberkasan::all();
-        $jawaban = Jawaban::where('orangtua_id', $orangtua_id)->get()->keyBy('pemberkasan_id'); 
-        $totalPemberkasan = Pemberkasan::count(); 
+        $jawaban = Jawaban::where('orangtua_id', $orangtua_id)->get()->keyBy('pemberkasan_id');
+        $totalPemberkasan = Pemberkasan::count();
         $totalJawaban = Jawaban::where('orangtua_id', $orangtua_id)->count();
         //  return response()->json(['totalJawaban' => $totalJawaban]);
         return view('web.orangtua.pemberkasan.index', ['pemberkasan' => $pemberkasan, 'jawaban' => $jawaban, 'totalPemberkasan' => $totalPemberkasan, 'totalJawaban'=> $totalJawaban]);
@@ -81,7 +81,7 @@ class PemberkasanController extends Controller
                     $validationRules['jawaban'] = [
                         'required',
                         'file',
-                        'max:2048'
+                        
                     ];
                     break;
 
@@ -143,7 +143,7 @@ class PemberkasanController extends Controller
         // return response()->json(['jawaban' => $jawaban]);
 
         return view('web.orangtua.pemberkasan.edit', [
-            'jawaban' => $jawaban, 
+            'jawaban' => $jawaban,
             'pemberkasan' => $jawaban->pemberkasan,
         ]);
     }
@@ -214,7 +214,7 @@ class PemberkasanController extends Controller
             if ($jawaban->jawaban && Storage::disk('public')->exists($jawaban->jawaban)) {
                 Storage::disk('public')->delete($jawaban->jawaban);
             }
-            
+
             $file = $request->file('jawaban');
             $path = $file->store('jawaban_files', 'public');
             $jawabanData = $path;

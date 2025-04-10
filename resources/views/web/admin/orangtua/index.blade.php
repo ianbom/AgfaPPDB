@@ -32,9 +32,9 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h4 class="card-title">Daftar Orang Tua</h4>
-                <a href="{{ route('admin.orangtua.create') }}" class="btn btn-primary">
+                {{-- <a href="{{ route('admin.orangtua.create') }}" class="btn btn-primary">
                     <i class="bi bi-plus-circle"></i> Tambah Baru
-                </a>
+                </a> --}}
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -47,7 +47,7 @@
                                 <th>Nama Anak</th>
                                 <th>Alamat</th>
                                 <th>No Hp</th>
-                                <th class="text-center">Aksi</th>
+                                {{-- <th class="text-center">Aksi</th> --}}
                             </tr>
                         </thead>
                         <tbody>
@@ -59,7 +59,7 @@
                                 <td class="align-middle">{{ $item->nama_anak ?? '-' }}</td>
                                 <td class="align-middle">{{ Str::limit($item->alamat, 30) }}</td>
                                 <td class="align-middle">{{ $item->no_hp }}</td>
-                                <td class="text-center align-middle">
+                                {{-- <td class="text-center align-middle">
                                     <div class="d-flex gap-1 justify-content-center">
                                         <a href="{{ route('admin.orangtua.edit', $item->id) }}"
                                            class="btn btn-sm btn-warning"
@@ -80,7 +80,7 @@
                                             </button>
                                         </form>
                                     </div>
-                                </td>
+                                </td> --}}
                             </tr>
                             @endforeach
                         </tbody>
@@ -112,9 +112,6 @@
                     "next": "<i class='bi bi-chevron-right'></i>"
                 }
             },
-            "columnDefs": [
-                { "orderable": false, "targets": [6] }
-            ]
         });
 
         // Initialize tooltips

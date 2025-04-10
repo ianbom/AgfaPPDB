@@ -32,7 +32,7 @@
             <div class="card-header bg-light">
                 <div class="d-flex align-items-center">
                     <i class="bi bi-file-text-fill me-2 text-primary"></i>
-                    <h4 class="card-title mb-0">Isi Pemberkasan - {{ $pemberkasan->soal }}</h4>
+                    <h4 class="card-title mb-0"> {{ $pemberkasan->soal }}</h4>
                 </div>
             </div>
             <div class="card-body">
@@ -136,7 +136,7 @@
                                         <i class="bi bi-info-circle me-1"></i>
                                         Format
                                     </span>
-                                    <small class="text-muted">PDF, JPG, PNG (Maks. 2MB)</small>
+                                    <small class="text-muted">PDF, JPG, PNG, PDF</small>
                                 </div>
                                 @error('jawaban')
                                 <div class="invalid-feedback">

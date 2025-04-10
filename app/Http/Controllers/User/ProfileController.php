@@ -58,11 +58,11 @@ class ProfileController extends Controller
         ]);
 
         try {
-            $imagePath = null;
+
             if ($request->hasFile('profile_anak')) {
                 $imagePath = $request->file('profile_anak')->store('image/anak', 'public');
             } else {
-                $imagePath = $user->profile_anak;
+                $imagePath = $user->orangtua->profile_anak;
             }
 
             $orangtua->update([

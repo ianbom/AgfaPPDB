@@ -56,15 +56,42 @@
                     </a>
                 </li>
 
-                <li class="sidebar-item">
-                    <a href="" class='sidebar-link'>
+                <li class="sidebar-item {{ Request::is('orangtua/seleksi*') ? 'active' : '' }}">
+                    <a href="{{ route('orangtua.seleksi.index') }}" class='sidebar-link'>
                         <i class="bi bi-stack"></i>
                         <span>Seleksi</span>
                     </a>
-
                 </li>
+
+                <li class="sidebar-title">Logout</li>
+
+                <li class="sidebar-item">
+                    <form id="logoutForm" action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-link logout-btn sidebar-link" id="logoutButton" style="text-decoration: none; color: inherit;">
+                            <i class="bi bi-box-arrow-right"></i>
+                            <span>Logout</span>
+                        </button>
+                    </form>
+                </li>
+
+
             </ul>
         </div>
         <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
     </div>
 </div>
+
+@section('scripts')
+<script>
+    document.getElementById('logoutForm').addEventListener('submit', function(e) {
+        e.preventDefault(); // cegah submit langsung
+
+        const confirmed = confirm('Apakah Anda yakin ingin logout?');
+        if (confirmed) {
+            this.submit(); // jika ya, baru submit form
+        }
+    });
+</script>
+
+@endsection

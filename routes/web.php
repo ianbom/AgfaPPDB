@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\SeleksiController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\User\PemberkasanController as UserPemberkasanController;
 use App\Http\Controllers\User\ProfileController;
+use App\Http\Controllers\User\SeleksiController as UserSeleksiController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -33,6 +34,7 @@ Route::prefix('admin')->middleware([])->as('admin.')->group(function () {
     Route::put('/profile/anak-update', [ProfileController::class, 'updateAnak'])->name('anak.update');
 
     Route::resource('/pemberkasan', UserPemberkasanController::class);
+    Route::resource('/seleksi', UserSeleksiController::class);
  });
 
 

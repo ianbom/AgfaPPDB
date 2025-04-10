@@ -32,7 +32,7 @@
             <div class="card-header bg-light">
                 <div class="d-flex align-items-center">
                     <i class="bi bi-file-text-fill me-2 text-primary"></i>
-                    <h4 class="card-title mb-0">Edit Pemberkasan - {{ $pemberkasan->soal }}</h4>
+                    <h4 class="card-title mb-0">{{ $pemberkasan->soal }}</h4>
                 </div>
             </div>
             <div class="card-body">
@@ -40,7 +40,7 @@
                     @csrf
                     @method('PUT')
                     <input type="hidden" name="pemberkasan_id" value="{{ $pemberkasan->id }}">
-                    
+
                     <div class="form-body py-2">
                         @if($pemberkasan->tipe === 'text')
                         <div class="form-group mb-4">
@@ -134,21 +134,21 @@
                                     class="form-control @error('jawaban') is-invalid @enderror"
                                     name="jawaban"
                                     style="border-radius: 8px; border-color: #dfe3e7;">
-                                
+
                                 @if($jawaban->jawaban)
                                 <div class="file-info mt-2 d-flex align-items-center">
                                     <span class="badge bg-light text-dark me-2">
                                         <i class="bi bi-file-earmark me-1"></i>
                                         File Saat Ini
                                     </span>
-                                    <a href="{{ Storage::url($jawaban->jawaban) }}" 
+                                    <a href="{{ Storage::url($jawaban->jawaban) }}"
                                        target="_blank"
                                        class="text-primary">
                                         Lihat File
                                     </a>
                                 </div>
                                 @endif
-                                
+
                                 <div class="file-info mt-2 d-flex align-items-center">
                                     <span class="badge bg-light text-dark me-2">
                                         <i class="bi bi-info-circle me-1"></i>

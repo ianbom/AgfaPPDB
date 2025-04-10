@@ -38,7 +38,28 @@
                     <div class="card-body">
                         <div class="d-flex flex-column align-items-center text-center">
                             @if($orangtua->profile_anak)
-                                <img src="{{ asset('storage/' . $orangtua->profile_anak) }}" alt="Profil Anak" class="img-fluid rounded-circle" style="width: 150px; height: 150px; object-fit: cover;">
+                            <div class="profile-image-container mb-3">
+                                <img src="{{ isset($orangtua->profile_anak) ? asset('storage/'.$orangtua->profile_anak) : asset('assets/images/faces/1.jpg') }}"
+                                     alt="Profile Anak"
+                                     class="profile-image-vertical">
+                            </div>
+                            <style>
+                                .profile-image-container {
+                                    width: 200px;
+                                    height: 300px;
+                                    overflow: hidden;
+                                    border-radius: 8px;
+                                    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                                }
+
+                                .profile-image-vertical {
+                                    width: 100%;
+                                    height: 100%;
+                                    object-fit: cover;
+                                    object-position: center;
+                                }
+                                </style>
+                                {{-- <img src="{{ asset('storage/' . $orangtua->profile_anak) }}" alt="Profil Anak" class="img-fluid rounded-circle" style="width: 150px; height: 150px; object-fit: cover;"> --}}
                             @else
                                 <div class="avatar bg-primary me-3" style="width: 150px; height: 150px; display: flex; align-items: center; justify-content: center;">
                                     <span class="avatar-content" style="font-size: 60px;">{{ substr($orangtua->nama_anak ?? 'A', 0, 1) }}</span>
@@ -134,7 +155,15 @@
                                     <tr>
                                         <td class="text-center">{{ $index + 1 }}</td>
                                         <td>{{ $item->soal ?? 'Tidak ada pertanyaan' }}</td>
-                                        <td>{{ $jawabanSiswa->jawaban ?? '-' }}</td>
+                                        <td>
+                                            @if($item->tipe === 'file' && $jawabanSiswa && $jawabanSiswa->jawaban)
+                                                <a href="{{ asset('storage/' . $jawabanSiswa->jawaban) }}" class="btn btn-sm btn-outline-primary" target="_blank">
+                                                    <i class="bi bi-download me-1"></i> Download
+                                                </a>
+                                            @else
+                                                {{ $jawabanSiswa->jawaban ?? '-' }}
+                                            @endif
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
