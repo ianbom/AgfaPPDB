@@ -1,0 +1,107 @@
+<?php
+
+namespace App\Http\Controllers\User;
+
+use App\Http\Controllers\Controller;
+use App\Models\Orangtua;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+
+class ProfileController extends Controller
+{
+    public function index(){
+       $orangtua = Auth::user()->orangtua;
+       $user = Auth::user();
+       return view('web.orangtua.profile.index', ['orangtua' => $orangtua, 'user' =>  $user]);
+    }
+
+    public function updateOrangtua(Request $request)
+    {
+        $user = Auth::user();
+        $orangtua = $user->orangtua;
+
+
+        $request->validate([
+            'email' => 'nullable',
+            'nama' => 'nullable|string|max:255',
+            'no_hp' => 'nullable|string|max:15',
+            'alamat' => 'nullable|string',
+        ]);
+
+        try {
+            $user->name = $request->nama;
+            $user->save();
+
+
+            $orangtua->update(
+                [
+                    'nama' => $request->nama,
+                    'no_hp' => $request->no_hp,
+                    'alamat' => $request->alamat,
+                ]
+            );
+
+            return redirect()->back()->with('success', 'Profil berhasil diperbarui.');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', $th->getMessage());
+        }
+
+    }
+
+    public function updateAnak(Request $request){
+        $user = Auth::user();
+        $orangtua = $user->orangtua;
+
+        $request->validate([
+            'nama_anak' => 'nullable|string|max:255',
+            'profile_anak' => 'nullable',
+        ]);
+
+        try {
+
+            if ($request->hasFile('profile_anak')) {
+                $imagePath = $request->file('profile_anak')->store('image/anak', 'public');
+            } else {
+                $imagePath = $user->orangtua->profile_anak;
+            }
+
+            $orangtua->update([
+                'nama_anak' => $request->nama_anak,
+                'profile_anak' => $imagePath
+
+            ]);
+
+            return redirect()->back()->with('success', 'Data anak berhasil diperbarui');
+        } catch (\Throwable $th) {
+            return response()->json(['err' => $th->getMessage()]);
+        }
+    }
+
+    public function updatePassword(Request $request){
+        $user = Auth::user();
+        $request->validate(([
+            'password' => 'required|string|min:8'
+        ]));
+        $passwordBaru = $request->password;
+        $konfirmasiPassword = $request->password_confirmation;
+
+        try {
+
+            if ($passwordBaru != $konfirmasiPassword) {
+                throw new \Exception('Konfirmasi Password Salah');
+            }
+
+            $user->update([
+                'password' => Hash::make($passwordBaru),
+            ]);
+
+            return redirect()->back()->with('success', 'Password Berhasil Diubah');
+
+        } catch (\Throwable $th) {
+           return redirect()->back()->with('error', $th->getMessage());
+        }
+
+    }
+}
+
