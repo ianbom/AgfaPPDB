@@ -41,5 +41,19 @@ Route::prefix('admin')->middleware([])->as('admin.')->group(function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/home', function () {
+
+    if (!Auth::check()) {
+        return redirect()->route('login');
+    }
+
+    if (Auth::user()->role == 'admin') {
+        return redirect()->route('admin.pemberkasan.index');
+    } elseif (Auth::user()->role == 'orangtua') {
+        return redirect()->route('orangtua.profile.index');
+    } else {
+        abort(403, 'Unauthorized');
+    }
+
+})->middleware('auth');

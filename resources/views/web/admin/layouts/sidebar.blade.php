@@ -1,15 +1,22 @@
+
+
 <div id="sidebar" class="active">
     <div class="sidebar-wrapper active">
         <div class="sidebar-header">
-            <div class="d-flex justify-content-between">
-                <div class="logo">
-                    <a href="index.html"><img src="/dashboard/dist/assets/images/logo/logo.png" alt="Logo" srcset=""></a>
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="logo mx-auto"> <!-- mx-auto untuk centering -->
+                    <a href="/admin/pemberkasan" class="d-flex justify-content-center">
+                        <img src="/logoag.jpg" alt="Logo"
+                             style="width: 80px; height: auto; max-width: 100%;"
+                             class="img-fluid">
+                    </a>
                 </div>
-                <div class="toggler">
-                    <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                <div class="toggler position-absolute end-0"> <!-- Posisi toggler di kanan -->
+                    <a href="#" class="sidebar-hide d-xl-none d-block pe-3"><i class="bi bi-x bi-middle"></i></a>
                 </div>
             </div>
         </div>
+
         <div class="sidebar-menu">
             <ul class="menu">
                 <li class="sidebar-title">Menu</li>
@@ -88,3 +95,5 @@
         <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
     </div>
 </div>
+
+

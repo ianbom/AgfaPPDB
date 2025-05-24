@@ -44,14 +44,14 @@ class SeleksiController extends Controller
                 'status' => 'required|string'
             ]);
 
+
             $seleksi = Seleksi::whereIn('id', $request->selected_ids)
             ->update(['status' => $request->status]);
 
             $ortuId = Seleksi::whereIn('id', $request->selected_ids)->pluck('orangtua_id');
-
             $orangtua = Orangtua::whereIn('id', $ortuId)->get();
 
-          
+
             foreach ($orangtua as $item) {
 
                 GmailSeleksiJob::dispatch($item, $request->status);

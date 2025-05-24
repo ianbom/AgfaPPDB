@@ -1,12 +1,16 @@
 <div id="sidebar" class="active">
     <div class="sidebar-wrapper active" style="background-color: #2d753f; border-radius: 0 16px 16px 0; overflow: hidden;">
-        <div class="sidebar-header">
-            <div class="d-flex justify-content-between">
-                <div class="logo">
-                    <a href="index.html"><img src="/dashboard/dist/assets/images/logo/logo.png" alt="Logo" srcset=""></a>
+          <div class="sidebar-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="logo mx-auto"> <!-- mx-auto untuk centering -->
+                    <a href="/orangtua/profile" class="d-flex justify-content-center">
+                        <img src="/agfanew.png" alt="Logo"
+                             style="width: 80px; height: auto; max-width: 100%;"
+                             class="img-fluid">
+                    </a>
                 </div>
-                <div class="toggler">
-                    <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                <div class="toggler position-absolute end-0"> <!-- Posisi toggler di kanan -->
+                    <a href="#" class="sidebar-hide d-xl-none d-block pe-3"><i class="bi bi-x bi-middle"></i></a>
                 </div>
             </div>
         </div>
